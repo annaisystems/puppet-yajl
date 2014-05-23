@@ -5,6 +5,7 @@ class yajl::params {
   $install_dev = false
   $version = '1.0.12'
   $supported_versions = ['1.0.12', '2.1.0']
+  $libname = 'libyajl'
 
   case $::osfamily {
     'RedHat': {
