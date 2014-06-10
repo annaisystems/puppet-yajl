@@ -30,6 +30,8 @@ class yajl (
     $source_url = "http://github.com/lloyd/yajl/tarball/${version}"
 
     include cmake
+    include gcc
+
     exec { 'download yajl source':
       command => "${download_command} ${source_package} ${source_url}",
       cwd     => '/tmp',
@@ -46,7 +48,7 @@ class yajl (
       command     => "cmake -DLIB_SUFFIX=${libsuffix} -DCMAKE_INSTALL_PREFIX:PATH=/usr .. && make install",
       cwd         => '/tmp/yajl_src/build',
       refreshonly => true,
-      require     => Class['cmake'],
+      require     => Class['gcc', 'cmake'],
       notify      => Exec['cleanup yajl source'],
     }
     exec { 'cleanup yajl source':
